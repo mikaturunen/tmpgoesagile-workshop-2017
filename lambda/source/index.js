@@ -12,6 +12,9 @@
  * @param {Object} context Lambda context object.
  * @param {Function} callback Lambda callback with normal node.js null, value callback pattern.
  */
-export const handler = (event, context, callback) =>  {
+exports.handler = (event, context, callback) =>  {
+  // we just simply dumb the event into the aws cloudwatch logs to see what is going on for now
+  console.log('Received event:', JSON.stringify(!event ? {} : event, null, 2));
+  
   callback(null, 'Hello, World!')
 }

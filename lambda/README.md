@@ -24,6 +24,37 @@ You don't actually have to install anything to test the Lambda and have it runni
 
 As of now, the Lambda does not use any external packages and thus does not really require running of `npm install` (or `yarn install`).
 
+This workshop assumes that you are of technical background and does not explain certain commands or functions too much and assumes you have written simple hello world -functions before in different languages.
+
 ## Running the Lambda
 
 * Get AWS Account, you'll need it, I'm pretty sure of this :smile:
+
+### Dashboard
+
+* Login
+* My Security Credentials
+
+* Users
+* Add user
+  * Name: Test
+
+
+### CLI
+
+```bash
+$ aws configure
+
+  AWS Access Key ID [None]:     AKI**************K4A
+  AWS Secret Access Key [None]: gbW**********************************KLL
+  Default region name [None]:   eu-central-1
+  Default output format [None]: json
+ 
+$ aws lambda list-functions
+
+  {
+    "Functions": []
+  }
+  
+$ 
+```
