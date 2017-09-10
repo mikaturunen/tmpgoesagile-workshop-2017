@@ -1,0 +1,9 @@
+{
+  "name": "tmpgoesagile-workshop-2017",
+  "version": "1.0.0",
+  "description": "Workshop materials for Tampere Goes Agile 2017 ",
+  "main": "index.js",
+  "repository": "git@github.com:mikaturunen/tmpgoesagile-workshop-2017.git",
+  "author": "Mika Turunen <mika.turunen@ymail.com>",
+  "license": "MIT"
+}
