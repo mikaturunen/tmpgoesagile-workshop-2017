@@ -35,6 +35,7 @@ The whole group will be using the same keys.
 
 ```bash
 # OSX
+$ export AWS_LAMBDA_ROLE=arn:aws:iam::************:role/workshop # Replace with the real Role
 $ aws configure
 
   AWS Access Key ID [None]:     AKI**************K4A
@@ -42,7 +43,7 @@ $ aws configure
   Default region name [None]:   eu-central-1
   Default output format [None]: json
  
-$ aws lambda list-functions
+$ aws lambda list-functions 
 
   {
     "Functions": []
@@ -53,8 +54,6 @@ $ zip -r lambda.zip * # We ZIP the contest of the file and send it off to AWS wi
 
   updating: index.js (deflated 41%)
   updating: package.json (deflated 36%)
-
-$ export AWS_LAMBDA_ROLE=arn:aws:iam::************:role/workshop # Replace with the real Role
 
 $ aws lambda create-function \
   --function-name workshop \
@@ -126,7 +125,7 @@ Follow these steps:
     * 'Create group'
     * Group name: 'Admin'
     * Find policy 'AdministratorAccess' and select it
-    * Now select your fresly created 'Admin' group and add the user to it
+    * Now select your freshly created 'Admin' group and add the user to it
     * 'Next: Review'
     * 'Create user'
     * Write down the `Access key ID` and `Secret access key`, you will use these with the CLI”
@@ -146,7 +145,7 @@ Follow these steps:
 * 'Roles'
 * Select your newly created Role 'workshop'
   * Find the full Role ARN: `arn:aws:iam::************:role/workshop`
-  * This is the Roly you need to have at hand
+  * This is the full Role you need to have at hand
 * Hop back into the section named 'CLI' and continue with the README.
 
 
