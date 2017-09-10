@@ -1,12 +1,5 @@
 # Requirements
 
-* AWS credentials
-  * [AWS Free Tier - Create a Free Account](https://aws.amazon.com/free)
-  * Go to the link and create a free tier Account
-  
-  
-## Optional
-
 * [AWS Command Line Interface installed](https://aws.amazon.com/cli)
 
 # Content of this directory
@@ -103,9 +96,17 @@ $ cat output.txt
 $ aws lambda delete-function --function-name workshop
 ```
 
-### Dashboard
+# Want to do the workshop but missed it at Tampere Goes Agile?
 
-If you missed the workshop and want to run through the workshop, you'll have to have the following:
+## Required
+
+* AWS credentials
+  * [AWS Free Tier - Create a Free Account](https://aws.amazon.com/free)
+  * Go to the link and create a free tier Account
+* [AWS Command Line Interface installed](https://aws.amazon.com/cli)
+
+
+Next you'll have to create the three following items to be able to run the CLI Commands:
 
 * AWS Access Key ID
 * AWS Secret Access Key
