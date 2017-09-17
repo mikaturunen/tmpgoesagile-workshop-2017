@@ -49,7 +49,7 @@ if ! aws lambda invoke \
   --payload "{}" \
   $UTILIRY_DIRECTORY/.output.log ; then
   
-  echo 'Failed to invoke the created Lambda.'
+  echo 'Failed to invoke the updated Lambda.'
 fi
 
 echo 'Response from the Lambda'
