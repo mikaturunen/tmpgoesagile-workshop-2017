@@ -7,31 +7,31 @@ In this workshop we'll quickly round up few AWS Lambdas, see how they work and w
 You'll get to deploy your very own AWS baby step lambdas and see what they do, play with the and most importantly, break them.
 
 
-
 # Requirements for workshop
 
 * [AWS Command Line Interface installed](https://aws.amazon.com/cli)
+* AWS Access Key ID
+* AWS Secret Access Key
+* Lambda role
 
 # Content of this directory
 
 * `source`: Directory contains all the source code for the lambda.
-* `source\index.js`: Lambda function code
-* `source\package.json`: Node.js package.json package file.
+* `source\hello-world\index.js`: Hello-world Lambda function
+* `source\hello-world\package.json`: Node.js package.json package file.
+* `source\dynamodb\index.js`: Dynamodb Lambda function
+* `source\dynamodb\package.json`: Node.js package.json package file.
 * `README.md`: This file, explaining everything.
 
 # How to use the Lambda
 
 ## Note before we start
 
-You don't actually have to install anything to test the Lambda and have it running in AWS. But if you want to run it locally, install additional packages and do something bigger, you need to have Node.js development environment installed.
+You don't actually have to install anything to test the `source\hello-world` Lambda and have it running in AWS. But if you want to run it locally, install additional packages and do something bigger, you need to have Node.js development environment installed. The same applies for `source\dynamodb`.
 
-As of now, the Lambda does not use any external packages and thus does not really require running of `npm install` (or `yarn install`).
+This workshop does not assume technical background but makes the assumption that you've written one or two hello world -type deals in the past.
 
-This workshop assumes that you are of technical background and does not explain certain commands or functions too much and assumes you have written simple hello world -functions before in different languages.
-
-## Running the Lambda
-
-* Get AWS Account, you'll need it, I'm pretty sure of this :smile:
+## Running the workshop materials
 
 ### CLI
 
@@ -41,15 +41,15 @@ These are given during the workshop:
 * AWS Access Key ID
 * AWS Secret Access Key
 
-The whole group will be using the same keys.
+The whole group will be using the same keys. Open terminal.
 
 ```bash
-# OSX
-# Replace with your own unique function name, if you share the function name with someone -> will get mixed up as you 
-# essentially are the same user during this workshop from access rights point of view :)
+# Tested on OSX.
+# Replace with your own unique function name, if you share the function name with someone -> will get mixed up with you.
+# Essentially you are the same user during this workshop from access rights point of view :)
 $ export AWS_LAMBDA_NAME=workshop                               
 # Replace this with the real role provided by the instructor or if you followed the guide below.
-$ export AWS_LAMBDA_ROLE=arn:aws:iam::************:role/workshop  # Replace with the real Role
+$ export AWS_LAMBDA_ROLE=arn:aws:iam::************:role/workshop
 # This is the execution environment, in this workshop we are using Node.js as it's fairly simple to understand.
 $ export AWS_LAMBDA_RUNTIME=nodejs6.10
 
@@ -66,11 +66,12 @@ $ aws lambda list-functions
     "Functions": []
   }
   
-$ cd source
-$ zip -r lambda.zip * # We ZIP the contest of the file and send it off to AWS with the CLI
+# We ZIP the contest of the file and send it off to AWS with the CLI
+# OSX Specific -- use whatever means to zip the content of the dir into lambda.zip inside the dir
+$ zip -r source/hello-world/lambda.zip source/hello-world/* 
 
-  updating: index.js (deflated 41%)
-  updating: package.json (deflated 36%)
+  updating: source/hello-world/index.js (deflated 41%)
+  updating: source/hello-world/package.json (deflated 36%)
 
 $ aws lambda create-function \
   --function-name workshop \
@@ -112,6 +113,21 @@ $ cat output.txt
 $ aws lambda delete-function --function-name workshop
 ```
 
+# Feeling lazy?
+
+Good, so am I. That's why I made a set of utility scripts to _really_ speed things up. Only tested to work on OS X but can't really see why they wouldn't work on nix based systems. Famous last words, eh?
+
+```bash
+$ export AWS_LAMBDA_NAME=workshop
+ # Replace with the real Role
+$ export AWS_LAMBDA_ROLE=arn:aws:iam::************:role/workshop 
+$ export AWS_LAMBDA_RUNTIME=nodejs6.10
+$ ./utilities/create-hello-world.sh
+$ ./utilities/delete-hello-world.sh
+```
+
+There, you've run the creation and deletion of it.
+
 # Want to do the workshop but missed it at Tampere Goes Agile?
 
 ## Required
@@ -121,12 +137,15 @@ $ aws lambda delete-function --function-name workshop
   * Go to the link and create a free tier Account
 * [AWS Command Line Interface installed](https://aws.amazon.com/cli)
 
+## Create required keys and roles
 
 Next you'll have to create the three following items to be able to run the CLI Commands:
 
 * AWS Access Key ID
 * AWS Secret Access Key
 * Lambda role
+
+## Login into AWS and start creating
 
 I assume you have created your AWS Free Tier account and are ready to login. 
 Follow these steps:
