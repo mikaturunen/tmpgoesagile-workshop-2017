@@ -47,3 +47,16 @@ touch $UTILIRY_DIRECTORY/.hello-world
 echo 'Listing available Lambda functions for current AWS Role.'
 aws lambda list-functions
 
+rm $UTILIRY_DIRECTORY/.output.log 2> /dev/null
+
+if ! aws lambda invoke \
+  --function-name $AWS_LAMBDA_NAME \
+  --invocation-type RequestResponse \
+  --payload "{}" \
+  $UTILIRY_DIRECTORY/.output.log ; then
+  
+  echo 'Failed to invoke the created Lambda.'
+fi
+
+echo 'Response from the Lambda'
+cat $UTILIRY_DIRECTORY/.output.log

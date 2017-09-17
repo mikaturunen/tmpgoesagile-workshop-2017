@@ -40,3 +40,17 @@ fi
 
 # juuuust playing if safe and creating the state file -- by definition it should be there already but still ;)
 touch $UTILIRY_DIRECTORY/.hello-world
+
+rm $UTILIRY_DIRECTORY/.output.log 2> /dev/null
+
+if ! aws lambda invoke \
+  --function-name $AWS_LAMBDA_NAME \
+  --invocation-type RequestResponse \
+  --payload "{}" \
+  $UTILIRY_DIRECTORY/.output.log ; then
+  
+  echo 'Failed to invoke the created Lambda.'
+fi
+
+echo 'Response from the Lambda'
+cat $UTILIRY_DIRECTORY/.output.log
