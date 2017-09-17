@@ -21,6 +21,12 @@ if ! . $UTILIRY_DIRECTORY/check-variables.sh ; then
   exit 1
 fi
 
+if [ -f $UTILIRY_DIRECTORY/.hello-world ] ; then 
+  echo 'State file is present. Lambda already created.'
+  echo 'If you know the Lambda is not created, rm utilities/.hello-world and re-run this script.' 
+  exit 0
+fi 
+
 echo 'Attempting to create AWS Lambda with name "'$AWS_LAMBDA_NAME'" and AWS Role "'$AWS_LAMBDA_ROLE_WORKSHOP'".' 
 
 if aws lambda create-function \
