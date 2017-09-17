@@ -1,4 +1,14 @@
-# Requirements
+# Practical AWS serverless 101
+
+It's a fairly good assumption to say that all technically inclined people more or less love new technology. That's what got them into it in the first place. So here we are, looking at AWS serverless capabilities when it comes to Lambdas. It's not super bleeding edge, but it doest have some funky features and behaviors that makes it more than interesting to look at and use in real life.
+
+In this workshop we'll quickly round up few AWS Lambdas, see how they work and what they do and once we're done with the workshop - you should have a fairly good idea of how they work, what they can do, what they are good in and what they are not so good at.
+
+You'll get to deploy your very own AWS baby step lambdas and see what they do, play with the and most importantly, break them.
+
+
+
+# Requirements for workshop
 
 * [AWS Command Line Interface installed](https://aws.amazon.com/cli)
 
@@ -35,7 +45,14 @@ The whole group will be using the same keys.
 
 ```bash
 # OSX
-$ export AWS_LAMBDA_ROLE=arn:aws:iam::************:role/workshop # Replace with the real Role
+# Replace with your own unique function name, if you share the function name with someone -> will get mixed up as you 
+# essentially are the same user during this workshop from access rights point of view :)
+$ export AWS_LAMBDA_NAME=workshop                               
+# Replace this with the real role provided by the instructor or if you followed the guide below.
+$ export AWS_LAMBDA_ROLE=arn:aws:iam::************:role/workshop  # Replace with the real Role
+# This is the execution environment, in this workshop we are using Node.js as it's fairly simple to understand.
+$ export AWS_LAMBDA_RUNTIME=nodejs6.10
+
 $ aws configure
 
   AWS Access Key ID [None]:     AKI**************K4A
@@ -57,7 +74,7 @@ $ zip -r lambda.zip * # We ZIP the contest of the file and send it off to AWS wi
 
 $ aws lambda create-function \
   --function-name workshop \
-  --runtime nodejs6.10 \
+  --runtime $AWS_LAMBDA_RUNTIME \
   --role $AWS_LAMBDA_ROLE \
   --handler index.handler \
   --zip-file fileb://lambda.zip
