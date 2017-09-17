@@ -21,23 +21,16 @@ if ! . $UTILIRY_DIRECTORY/check-variables.sh ; then
   exit 1
 fi
 
-echo 'Attempting to create AWS Lambda with name "'$AWS_LAMBDA_NAME'" and AWS Role "'$AWS_LAMBDA_ROLE_WORKSHOP'".' 
+echo 'Attempting to destroy AWS Lambda with name "'$AWS_LAMBDA_NAME'" and AWS Role "'$AWS_LAMBDA_ROLE_WORKSHOP'".' 
 
-if aws lambda create-function \
-  --function-name $AWS_LAMBDA_NAME \
-  --runtime $AWS_LAMBDA_RUNTIME \
-  --role $AWS_LAMBDA_ROLE_WORKSHOP \
-  --handler $AWS_LAMBDA_HANDLER \
-  --zip-file $AWS_LAMBDA_ZIP_FILE ; then 
+if aws lambda delete-function \
+  --function-name $AWS_LAMBDA_NAME ; then 
   
-  echo 'Created Lambda OK.'
+  echo 'Lambda destroyed.'
 else 
-  echo 'Failed to create Lambda.'
+  echo 'Failed to destroy Lambda.'
   exit 1
 fi
 
-touch $UTILIRY_DIRECTORY/.hello-world
-
-echo 'Listing available Lambda functions for current AWS Role.'
-aws lambda list-functions
-
+# Remove the state file for the lambda
+rm $UTILIRY_DIRECTORY/.hello-world 2> /dev/null
