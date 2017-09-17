@@ -58,5 +58,6 @@ typings/
 .env
 
 .hello-world
-.dynamodb
+.dynamo
 .output.log
+.DS_Store

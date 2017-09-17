@@ -8,5 +8,8 @@
   "license": "MIT",
   "engines": {
     "node": ">=6.1.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.117.0"
   }
 }

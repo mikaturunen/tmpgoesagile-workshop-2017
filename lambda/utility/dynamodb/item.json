@@ -1,0 +1,10 @@
+{
+  "TableName": "Workshop",
+  "Item": {
+    "year": 2017,
+    "title": "Tampere Goes Agile",
+    "info": {
+      "description": "It's a fairly good assumption to say that all technically inclined people more or less love new technology. That's what got them into it in the first place. So here we are, looking at AWS serverless capabilities when it comes to Lambdas. It's not super bleeding edge, but it doest have some funky features and behaviors that makes it more than interesting to look at and use in real life.\nIn this workshop we'll quickly round up few AWS Lambdas, see how they work and what they do and once we're done with the workshop - you should have a fairly good idea of how they work, what they can do, what they are good in and what they are not so good at.\nYou'll get to deploy your very own AWS baby step lambdas and see what they do, play with the and most importantly, break them."
+    }
+  }
+}
