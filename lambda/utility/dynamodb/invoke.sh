@@ -28,25 +28,11 @@ if ! [ -f $UTILITY_DIRECTORY/.dynamo ] ; then
   exit 1
 fi 
 
-if aws lambda update-function-code \
-  --function-name $AWS_LAMBDA_NAME_WORKSHOP \
-  --zip-file $AWS_LAMBDA_ZIP_FILE ; then 
-  
-  echo 'Updated Lambda OK.'
-else 
-  echo 'Failed to update Lambda.'
-  exit 1
-fi
-
-# juuuust playing if safe and creating the state file -- by definition it should be there already but still ;)
-touch $UTILITY_DIRECTORY/.dynamo
-
-rm $UTILITY_DIRECTORY/.output.log 2> /dev/null
 
 if ! aws lambda invoke \
   --function-name $AWS_LAMBDA_NAME_WORKSHOP \
   --invocation-type RequestResponse \
-  --payload file://$UTILITY_DIRECTORY/item.json \
+  --payload fileb://$UTILITY_DIRECTORY/item.json \
   $UTILITY_DIRECTORY/.output.log ; then
   
   echo 'Failed to invoke the updated Lambda.'

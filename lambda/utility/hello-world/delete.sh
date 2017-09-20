@@ -21,12 +21,6 @@ if ! . $UTILITY_DIRECTORY/check-variables.sh ; then
   exit 1
 fi
 
-if ! [ -f $UTILITY_DIRECTORY/.hello-world ] ; then 
-  echo 'State file is not present. Lambda not deleted.'
-  echo 'If you know the Lambda is created, touch utility/hello-world/.hello-world and re-run this script.' 
-  exit 0
-fi 
-
 echo 'Attempting to destroy AWS Lambda with name "'$AWS_LAMBDA_NAME_WORKSHOP'" and AWS Role "'$AWS_LAMBDA_ROLE_WORKSHOP'".' 
 
 if aws lambda delete-function \

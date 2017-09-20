@@ -1,6 +1,5 @@
 {
-  "TableName": "Workshop",
-  "Item": {
+  "item": {
     "year": 2017,
     "title": "Tampere Goes Agile",
     "info": {
