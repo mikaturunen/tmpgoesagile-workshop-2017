@@ -6,10 +6,11 @@ const AWS = require('aws-sdk')
 
 AWS.config.update({ region: 'eu-central-1' })
 const dynamoClient = new AWS.DynamoDB.DocumentClient()
+const TableName = "Workshop"
 
 /**
  * Handler function for Lambda. AWS Lambda will execute this `handler` method when AWS invokes
- * this lambda. You have to invoke the context.done to properly terminate the Lambda in both
+ * this lambda. You have to invoke the callback to properly terminate the Lambda in both
  * success and failure cases.
  *
  * @param {Object} event Full event data AWS sends this Lambda. Completely context dependant.   
@@ -29,14 +30,41 @@ exports.handler = (event, context, callback) =>  {
     const dynamoClient = new AWS.DynamoDB.DocumentClient()
   }
   
+  const dynamoParameters = {
+    TableName,
+    Item: event.item
+  }
+  
+  // NOTE that I'm using the tower of doom callback pattern, didn't want to spin complexity in the example by using 
+  //      promises or await/asyncs
   console.log("Adding a new item.")
-  dynamoClient.put(event, (error, dynamoResponse) => {
+  dynamoClient.put(dynamoParameters, (error, dynamoResponse) => {
       if (error) {
-        const message = 'Unable to add item. Error JSON: ' + JSON.stringify(err, null, 2)
+        const message = 'Unable to add item. Error JSON: ' + JSON.stringify(error, null, 2)
         console.error(message)
-      } else {
-        console.log('Added item: ', JSON.stringify(dynamoResponse, null, 2))
-        callback(null, dynamoResponse)
+        callback(message)
+        return
+      } 
+      
+      console.log('Added item: ', JSON.stringify(dynamoResponse, null, 2))
+    
+      const dynamoGetParameters = {
+        TableName,
+        Key: {
+          title: event.item.title
+        }
       }
+      
+      console.log('Getting item.')
+      dynamoClient.get(dynamoGetParameters, (error, dynamoResponse) => {
+        if (error) {
+          const message = 'Unable to get item. Error JSON: ' + JSON.stringify(error, null, 2)
+          console.error(message)
+          callback(null, message)
+        } else {
+          console.log('Got item: ', JSON.stringify(dynamoResponse, null, 2))
+          callback(null, dynamoResponse)
+        }
+      })
   })
 }
