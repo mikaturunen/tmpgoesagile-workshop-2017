@@ -12,7 +12,7 @@ List of related websites:
 
 # What is this repo about
 
-The repository should be fairly self-contained and contain all of the materials that were used in the workshop and all of the content that should you get through the workshop on your own pace, if you happened to miss it.
+The repository should be fairly self-contained and contain all of the materials that were used in the workshop and all of the content that should get you through the workshop on your own pace, if you happened to miss it.
 
 Navigate into the `lambda` directory to begin. You can continue on your own pace by going through the part 'Want to do the workshop but missed it at Tampere Goes Agile?'. It guides you through in creating all the necessary access rights and everything to have it all up and running in AWS.
 
